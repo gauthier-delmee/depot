@@ -15,6 +15,9 @@ class ProductsControllerTest < ActionController::TestCase
     get :index
     assert_response :success
     assert_not_nil assigns(:products)
+    assert_select '#columns #side a', :minimum => 4
+    assert_select '#main .list_description', 3
+    assert_select 'dt', 3
   end
 
   test "should get new" do
@@ -41,7 +44,7 @@ class ProductsControllerTest < ActionController::TestCase
   end
 
   test "should update product" do
-    patch :update, id: @product, product: { description: @product.description, image_url: @product.image_url, price: @product.price, title: @product.title }
+    patch :update, id: @product.to_param, :product => @update
     assert_redirected_to product_path(assigns(:product))
   end
 
@@ -52,4 +55,5 @@ class ProductsControllerTest < ActionController::TestCase
 
     assert_redirected_to products_path
   end
+  
 end
