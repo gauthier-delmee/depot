@@ -2,7 +2,6 @@ require 'test_helper'
 
 class StoreControllerTest < ActionController::TestCase
   test "should get index" do
-    puts :index
     get :index
     assert_response :success
     assert_select '#columns #side a', :minimum => 4
